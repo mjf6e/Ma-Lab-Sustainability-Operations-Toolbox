@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Lab Sustainability &amp; Operations Toolbox</title>
+<meta name="description" content="A searchable directory of Ma Lab's sustainability, safety, and operations policies.">
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --navy:#232D4B;
+  --navy-2:#2b3a63;
+  --orange:#E57200;
+  --paper:#f6f4ef;
+  --card:#ffffff;
+  --ink:#1d2230;
+  --muted:#5d6373;
+  --line:#e3e0d8;
+  --link:#1f5aac;
+  --chip-inv:#eaf0f7;      --chip-inv-ink:#244a7a;
+  --chip-waste:#e9f5ef;    --chip-waste-ink:#1a6b46;
+  --chip-energy:#fdeede;   --chip-energy-ink:#9a4e08;
+  --chip-fifo:#eaf0f7;     --chip-fifo-ink:#244a7a;
+  --chip-chem:#e9f5ef;     --chip-chem-ink:#1a6b46;
+  --chip-animal:#fdeede;   --chip-animal-ink:#9a4e08;
+  --chip-safety:#eaf0f7;   --chip-safety-ink:#244a7a;
+  --chip-fair:#f4ecf9;     --chip-fair-ink:#6a2c94;
+  --chip-autoclave:#fdeede;--chip-autoclave-ink:#9a4e08;
+  --chip-docs:#eef0f2;      --chip-docs-ink:#3a4048;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ---------- Header ---------- */
+header.hero{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff;
+  padding:48px 24px 40px;
+  border-bottom:5px solid var(--orange);
+}
+.hero-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;}
+.hero-brand{flex-shrink:0;}
+.hero-logo{
+  width:76px;height:76px;border-radius:50%;
+  object-fit:cover;background:#fff;
+  border:2px solid rgba(255,255,255,.5);
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+.hero-text{max-width:640px;}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--orange);
+  margin:0 0 12px;
+}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:700;
+  font-size:clamp(1.9rem,4.5vw,3rem);
+  line-height:1.08;
+  margin:0 0 14px;
+}
+.hero p.lede{
+  margin:0;
+  max-width:60ch;
+  color:#d7dceb;
+  font-size:1.02rem;
+}
+.hero-badge{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:12px;
+  padding:14px 18px;
+}
+.hero-badge .disc{
+  width:46px;height:46px;border-radius:50%;
+  border:3px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-weight:700;font-size:1.3rem;color:var(--orange);
+  flex-shrink:0;
+}
+.hero-badge span{font-size:.82rem;color:#d7dceb;line-height:1.35;}
+.hero-badge b{display:block;color:#fff;font-size:.92rem;}
+
+/* ---------- Controls ---------- */
+.controls{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(246,244,239,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:16px 24px;
+}
+.controls-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+}
+.search-wrap{position:relative;flex:1 1 320px;}
+.search-wrap svg{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;stroke:var(--muted);
+}
+#search{
+  width:100%;
+  padding:12px 14px 12px 42px;
+  font-size:1rem;
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  color:var(--ink);
+}
+#search:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(229,114,0,.15);}
+.filters{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--muted);
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.filter-btn:hover{border-color:var(--navy);color:var(--navy);}
+.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+.count{
+  width:100%;
+  max-width:1080px;
+  margin:10px auto 0;
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+/* ---------- Layout ---------- */
+main{max-width:1080px;margin:0 auto;padding:32px 24px 64px;}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:20px;
+}
+
+/* ---------- Card ---------- */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px 22px 18px;
+  display:flex;flex-direction:column;
+  box-shadow:0 1px 2px rgba(35,45,75,.04);
+  transition:box-shadow .18s ease,transform .18s ease;
+}
+.card:hover{box-shadow:0 8px 22px rgba(35,45,75,.10);transform:translateY(-2px);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.chip{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  padding:4px 9px;border-radius:6px;white-space:nowrap;
+}
+.chip.inv{background:var(--chip-inv);color:var(--chip-inv-ink);}
+.chip.waste{background:var(--chip-waste);color:var(--chip-waste-ink);}
+.chip.energy{background:var(--chip-energy);color:var(--chip-energy-ink);}
+.chip.fifo{background:var(--chip-fifo);color:var(--chip-fifo-ink);}
+.chip.chem{background:var(--chip-chem);color:var(--chip-chem-ink);}
+.chip.animal{background:var(--chip-animal);color:var(--chip-animal-ink);}
+.chip.safety{background:var(--chip-safety);color:var(--chip-safety-ink);}
+.chip.fair{background:var(--chip-fair);color:var(--chip-fair-ink);}
+.chip.autoclave{background:var(--chip-autoclave);color:var(--chip-autoclave-ink);}
+.chip.docs{background:var(--chip-docs);color:var(--chip-docs-ink);}
+
+.card h3{
+  font-family:Georgia,serif;
+  font-size:1.2rem;
+  margin:10px 0 2px;
+  color:var(--navy);
+  line-height:1.25;
+}
+.role{font-size:.86rem;color:var(--muted);margin:0 0 12px;}
+.talk{font-size:.95rem;margin:0 0 4px;color:var(--ink);}
+.talk b{color:var(--ink);}
+.meta{font-size:.82rem;color:var(--muted);margin:8px 0 0;}
+ul.links{list-style:none;margin:12px 0 0;padding:0;}
+ul.links li{
+  position:relative;padding-left:18px;margin-bottom:6px;font-size:.92rem;line-height:1.35;
+}
+ul.links li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:6px;height:6px;border-radius:50%;background:var(--orange);
+}
+.emails{margin:10px 0 0;}
+.emails a, .emails span{display:block;font-size:.88rem;margin-bottom:3px;word-break:break-word;color:var(--muted);}
+
+/* ---------- Full guide panel ---------- */
+.boxpanel{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff;border-radius:16px;padding:34px 30px;text-align:center;
+  border:1px solid var(--line);box-shadow:0 6px 20px rgba(35,45,75,.12);
+  margin-bottom:28px;
+}
+.boxpanel h2{font-family:Georgia,serif;font-size:1.5rem;margin:0 0 10px;color:#fff;}
+.boxpanel p{max-width:56ch;margin:0 auto 22px;color:#d7dceb;font-size:1rem;line-height:1.55;}
+.boxbtn{
+  display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;
+  font-weight:700;font-size:1rem;padding:14px 26px;border-radius:10px;text-decoration:none;
+  box-shadow:0 3px 10px rgba(229,114,0,.35);transition:transform .15s ease,box-shadow .15s ease;
+}
+.boxbtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(229,114,0,.45);text-decoration:none;}
+.boxnote{margin-top:18px;font-size:.82rem;color:#aeb6cc;}
+
+.no-results{
+  text-align:center;color:var(--muted);padding:60px 20px;font-size:1.05rem;
+  display:none;
+}
+
+/* ---------- Footer ---------- */
+footer{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:28px 24px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+footer .footer-inner{max-width:1080px;margin:0 auto;}
+footer b{color:var(--navy);}
+.footer-logos{margin-bottom:16px;}
+.footer-logo{height:44px;width:auto;}
+
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr;}
+  header.hero{padding:36px 20px 30px;}
+  .hero-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">
+      <img src="ma-lab-logo.jpg" alt="Ma Lab logo" class="hero-logo">
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">UVA Sustainable Labs &middot; My Green Lab Gold Certified</p>
+      <h1>Ma Lab Sustainability<br>&amp; Operations Toolbox</h1>
+      <p class="lede">The Ma Lab is deeply committed to integrating sustainability into every facet of our research operations. We prioritize environmentally responsible practices by minimizing resource consumption, reducing waste, and selecting materials and methods that align with green chemistry and low-impact protocols. We actively seek to optimize energy efficiency in our instrumentation and infrastructure, and we encourage digital collaboration to reduce travel-related emissions. Sustainability is not an afterthought &mdash; it is a guiding principle that informs our experimental design, procurement decisions, and long-term project planning.</p>
+    </div>
+    <div class="hero-badge">
+      <div class="disc">G</div>
+      <span><b>Gold Certified</b>My Green Lab &middot; UVA Sustainability</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="search" type="search" placeholder="Search policies, equipment, or topics&hellip;" autocomplete="off">
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="inv">Inventory &amp; Ordering</button>
+      <button class="filter-btn" data-filter="waste">Waste Mgmt</button>
+      <button class="filter-btn" data-filter="energy">Energy</button>
+      <button class="filter-btn" data-filter="fifo">FIFO</button>
+      <button class="filter-btn" data-filter="chem">Green Chemistry</button>
+      <button class="filter-btn" data-filter="animal">Animal Research</button>
+      <button class="filter-btn" data-filter="safety">Safety</button>
+      <button class="filter-btn" data-filter="fair">FAIR Data</button>
+      <button class="filter-btn" data-filter="autoclave">Autoclave</button>
+      <button class="filter-btn" data-filter="docs">Source Documents</button>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+</div>
+
+<main>
+  <div class="boxpanel">
+    <h2>Ma Lab &middot; Contact</h2>
+    <p>Jianjie Ma Lab &middot; 409 Lane Road, Charlottesville, VA 22903 &middot; 434.924.5329<br>
+    General inquiries: <a href="mailto:mjf6e@virginia.edu" style="color:#fff;text-decoration:underline;">mjf6e@virginia.edu</a> &middot;
+    Fume hood questions: <a href="mailto:ehs@virginia.edu" style="color:#fff;text-decoration:underline;">ehs@virginia.edu</a> or 434-982-4911</p>
+    <p class="boxnote">This page is the lab's living reference &mdash; every policy below is searchable and filterable, no need to dig through slide decks.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="no-results" id="noResults">No policies match your search. Try a different term or clear the filters.</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logos">
+      <img src="uva-sustainable-labs-logo.jpeg" alt="UVA Sustainability — Sustainable Labs logo" class="footer-logo">
+    </div>
+    <p><b>About this page.</b> Compiled from Ma Lab's internal sustainability policy documents and UVA Green Labs / UVA Sustainability training materials (inventory &amp; resource sharing, waste hierarchy, energy action plan, FIFO training, green chemistry, ordering process, animal research policies, and chemical fume hood tips). If a policy here ever conflicts with an updated lab memo, the memo wins &mdash; flag the difference to the lab manager so this page can be corrected.</p>
+    <p>Ma Lab &middot; University of Virginia.</p>
+  </div>
+</footer>
+
+<script>
+const DATA = __DATA__;
+
+const grid = document.getElementById('grid');
+const noResults = document.getElementById('noResults');
+const countEl = document.getElementById('count');
+const searchEl = document.getElementById('search');
+const filterBtns = document.querySelectorAll('.filter-btn');
+let activeFilter = 'all';
+
+const CHIP_LABEL = {
+  inv: 'Inventory &amp; Ordering', waste: 'Waste Mgmt', energy: 'Energy',
+  fifo: 'FIFO', chem: 'Green Chemistry', animal: 'Animal Research',
+  safety: 'Safety', fair: 'FAIR Data', autoclave: 'Autoclave', docs: 'Source Document'
+};
+
+function cardHTML(item){
+  const fileExt = /\.(xlsx|xls|csv|docx|pdf|pptx|zip)$/i;
+  const links = (item.links || []).map(l => {
+    const isFile = fileExt.test(l.url);
+    const attrs = isFile ? `download` : `target="_blank" rel="noopener"`;
+    return `<li><a href="${l.url}" ${attrs}>${l.note}</a></li>`;
+  }).join('');
+  const emails = (item.emails || []).map(e => `<span>${e}</span>`).join('');
+  return `
+  <div class="card" data-type="${item.type}">
+    <div class="card-top">
+      <span class="chip ${item.type}">${CHIP_LABEL[item.type]}</span>
+    </div>
+    <h3>${item.name}</h3>
+    <p class="role">${item.role || ''}</p>
+    <p class="talk">${item.talk}</p>
+    ${item.extra ? `<p class="talk" style="color:var(--muted);font-size:.88rem;">${item.extra}</p>` : ''}
+    ${links ? `<ul class="links">${links}</ul>` : ''}
+    ${emails ? `<div class="emails">${emails}</div>` : ''}
+    ${item.meta ? `<p class="meta">${item.meta}</p>` : ''}
+  </div>`;
+}
+
+function normalize(s){ return (s || '').toLowerCase(); }
+
+function render(){
+  const q = normalize(searchEl.value);
+  const filtered = DATA.filter(item => {
+    const matchesFilter = activeFilter === 'all' || item.type === activeFilter;
+    if (!matchesFilter) return false;
+    if (!q) return true;
+    const haystack = normalize([item.name, item.role, item.talk, item.extra, item.topics].join(' '));
+    return haystack.includes(q);
+  });
+  grid.innerHTML = filtered.map(cardHTML).join('');
+  noResults.style.display = filtered.length ? 'none' : 'block';
+  countEl.textContent = `${filtered.length} of ${DATA.length} policies shown`;
+}
+
+searchEl.addEventListener('input', render);
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>

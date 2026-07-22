@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Lab Sustainability &amp; Operations Toolbox</title>
+<meta name="description" content="A searchable directory of Ma Lab's sustainability, safety, and operations policies.">
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --navy:#232D4B;
+  --navy-2:#2b3a63;
+  --orange:#E57200;
+  --paper:#f6f4ef;
+  --card:#ffffff;
+  --ink:#1d2230;
+  --muted:#5d6373;
+  --line:#e3e0d8;
+  --link:#1f5aac;
+  --chip-inv:#eaf0f7;      --chip-inv-ink:#244a7a;
+  --chip-waste:#e9f5ef;    --chip-waste-ink:#1a6b46;
+  --chip-energy:#fdeede;   --chip-energy-ink:#9a4e08;
+  --chip-fifo:#eaf0f7;     --chip-fifo-ink:#244a7a;
+  --chip-chem:#e9f5ef;     --chip-chem-ink:#1a6b46;
+  --chip-animal:#fdeede;   --chip-animal-ink:#9a4e08;
+  --chip-safety:#eaf0f7;   --chip-safety-ink:#244a7a;
+  --chip-fair:#f4ecf9;     --chip-fair-ink:#6a2c94;
+  --chip-autoclave:#fdeede;--chip-autoclave-ink:#9a4e08;
+  --chip-docs:#eef0f2;      --chip-docs-ink:#3a4048;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Source Sans 3","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--link);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ---------- Header ---------- */
+header.hero{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff;
+  padding:48px 24px 40px;
+  border-bottom:5px solid var(--orange);
+}
+.hero-inner{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap;}
+.hero-brand{flex-shrink:0;}
+.hero-logo{
+  width:76px;height:76px;border-radius:50%;
+  object-fit:cover;background:#fff;
+  border:2px solid rgba(255,255,255,.5);
+  box-shadow:0 3px 10px rgba(0,0,0,.25);
+}
+.hero-text{max-width:640px;}
+.eyebrow{
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--orange);
+  margin:0 0 12px;
+}
+.hero h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:700;
+  font-size:clamp(1.9rem,4.5vw,3rem);
+  line-height:1.08;
+  margin:0 0 14px;
+}
+.hero p.lede{
+  margin:0;
+  max-width:60ch;
+  color:#d7dceb;
+  font-size:1.02rem;
+}
+.hero-badge{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:12px;
+  padding:14px 18px;
+}
+.hero-badge .disc{
+  width:46px;height:46px;border-radius:50%;
+  border:3px solid var(--orange);
+  display:flex;align-items:center;justify-content:center;
+  font-family:Georgia,serif;font-weight:700;font-size:1.3rem;color:var(--orange);
+  flex-shrink:0;
+}
+.hero-badge span{font-size:.82rem;color:#d7dceb;line-height:1.35;}
+.hero-badge b{display:block;color:#fff;font-size:.92rem;}
+
+/* ---------- Controls ---------- */
+.controls{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(246,244,239,.95);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:16px 24px;
+}
+.controls-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+}
+.search-wrap{position:relative;flex:1 1 320px;}
+.search-wrap svg{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;stroke:var(--muted);
+}
+#search{
+  width:100%;
+  padding:12px 14px 12px 42px;
+  font-size:1rem;
+  border:1.5px solid var(--line);
+  border-radius:10px;
+  background:#fff;
+  color:var(--ink);
+}
+#search:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(229,114,0,.15);}
+.filters{display:flex;gap:8px;flex-wrap:wrap;}
+.filter-btn{
+  border:1.5px solid var(--line);
+  background:#fff;
+  color:var(--muted);
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:.9rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .15s ease;
+}
+.filter-btn:hover{border-color:var(--navy);color:var(--navy);}
+.filter-btn.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+.count{
+  width:100%;
+  max-width:1080px;
+  margin:10px auto 0;
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+/* ---------- Layout ---------- */
+main{max-width:1080px;margin:0 auto;padding:32px 24px 64px;}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));
+  gap:20px;
+}
+
+/* ---------- Card ---------- */
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:22px 22px 18px;
+  display:flex;flex-direction:column;
+  box-shadow:0 1px 2px rgba(35,45,75,.04);
+  transition:box-shadow .18s ease,transform .18s ease;
+}
+.card:hover{box-shadow:0 8px 22px rgba(35,45,75,.10);transform:translateY(-2px);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.chip{
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+  padding:4px 9px;border-radius:6px;white-space:nowrap;
+}
+.chip.inv{background:var(--chip-inv);color:var(--chip-inv-ink);}
+.chip.waste{background:var(--chip-waste);color:var(--chip-waste-ink);}
+.chip.energy{background:var(--chip-energy);color:var(--chip-energy-ink);}
+.chip.fifo{background:var(--chip-fifo);color:var(--chip-fifo-ink);}
+.chip.chem{background:var(--chip-chem);color:var(--chip-chem-ink);}
+.chip.animal{background:var(--chip-animal);color:var(--chip-animal-ink);}
+.chip.safety{background:var(--chip-safety);color:var(--chip-safety-ink);}
+.chip.fair{background:var(--chip-fair);color:var(--chip-fair-ink);}
+.chip.autoclave{background:var(--chip-autoclave);color:var(--chip-autoclave-ink);}
+.chip.docs{background:var(--chip-docs);color:var(--chip-docs-ink);}
+
+.card h3{
+  font-family:Georgia,serif;
+  font-size:1.2rem;
+  margin:10px 0 2px;
+  color:var(--navy);
+  line-height:1.25;
+}
+.role{font-size:.86rem;color:var(--muted);margin:0 0 12px;}
+.talk{font-size:.95rem;margin:0 0 4px;color:var(--ink);}
+.talk b{color:var(--ink);}
+.meta{font-size:.82rem;color:var(--muted);margin:8px 0 0;}
+ul.links{list-style:none;margin:12px 0 0;padding:0;}
+ul.links li{
+  position:relative;padding-left:18px;margin-bottom:6px;font-size:.92rem;line-height:1.35;
+}
+ul.links li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:6px;height:6px;border-radius:50%;background:var(--orange);
+}
+.emails{margin:10px 0 0;}
+.emails a, .emails span{display:block;font-size:.88rem;margin-bottom:3px;word-break:break-word;color:var(--muted);}
+
+/* ---------- Full guide panel ---------- */
+.boxpanel{
+  background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff;border-radius:16px;padding:34px 30px;text-align:center;
+  border:1px solid var(--line);box-shadow:0 6px 20px rgba(35,45,75,.12);
+  margin-bottom:28px;
+}
+.boxpanel h2{font-family:Georgia,serif;font-size:1.5rem;margin:0 0 10px;color:#fff;}
+.boxpanel p{max-width:56ch;margin:0 auto 22px;color:#d7dceb;font-size:1rem;line-height:1.55;}
+.boxbtn{
+  display:inline-flex;align-items:center;gap:10px;background:var(--orange);color:#fff;
+  font-weight:700;font-size:1rem;padding:14px 26px;border-radius:10px;text-decoration:none;
+  box-shadow:0 3px 10px rgba(229,114,0,.35);transition:transform .15s ease,box-shadow .15s ease;
+}
+.boxbtn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(229,114,0,.45);text-decoration:none;}
+.boxnote{margin-top:18px;font-size:.82rem;color:#aeb6cc;}
+
+.no-results{
+  text-align:center;color:var(--muted);padding:60px 20px;font-size:1.05rem;
+  display:none;
+}
+
+/* ---------- Footer ---------- */
+footer{
+  border-top:1px solid var(--line);
+  background:#fff;
+  padding:28px 24px;
+  color:var(--muted);
+  font-size:.85rem;
+}
+footer .footer-inner{max-width:1080px;margin:0 auto;}
+footer b{color:var(--navy);}
+.footer-logos{margin-bottom:16px;}
+.footer-logo{height:44px;width:auto;}
+
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr;}
+  header.hero{padding:36px 20px 30px;}
+  .hero-inner{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-brand">
+      <img src="ma-lab-logo.jpg" alt="Ma Lab logo" class="hero-logo">
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">UVA Sustainable Labs &middot; My Green Lab Gold Certified</p>
+      <h1>Ma Lab Sustainability<br>&amp; Operations Toolbox</h1>
+      <p class="lede">The Ma Lab is deeply committed to integrating sustainability into every facet of our research operations. We prioritize environmentally responsible practices by minimizing resource consumption, reducing waste, and selecting materials and methods that align with green chemistry and low-impact protocols. We actively seek to optimize energy efficiency in our instrumentation and infrastructure, and we encourage digital collaboration to reduce travel-related emissions. Sustainability is not an afterthought &mdash; it is a guiding principle that informs our experimental design, procurement decisions, and long-term project planning.</p>
+    </div>
+    <div class="hero-badge">
+      <div class="disc">G</div>
+      <span><b>Gold Certified</b>My Green Lab &middot; UVA Sustainability</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input id="search" type="search" placeholder="Search policies, equipment, or topics&hellip;" autocomplete="off">
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="inv">Inventory &amp; Ordering</button>
+      <button class="filter-btn" data-filter="waste">Waste Mgmt</button>
+      <button class="filter-btn" data-filter="energy">Energy</button>
+      <button class="filter-btn" data-filter="fifo">FIFO</button>
+      <button class="filter-btn" data-filter="chem">Green Chemistry</button>
+      <button class="filter-btn" data-filter="animal">Animal Research</button>
+      <button class="filter-btn" data-filter="safety">Safety</button>
+      <button class="filter-btn" data-filter="fair">FAIR Data</button>
+      <button class="filter-btn" data-filter="autoclave">Autoclave</button>
+      <button class="filter-btn" data-filter="docs">Source Documents</button>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+</div>
+
+<main>
+  <div class="boxpanel">
+    <h2>Ma Lab &middot; Contact</h2>
+    <p>Jianjie Ma Lab &middot; 409 Lane Road, Charlottesville, VA 22903 &middot; 434.924.5329<br>
+    General inquiries: <a href="mailto:mjf6e@virginia.edu" style="color:#fff;text-decoration:underline;">mjf6e@virginia.edu</a> &middot;
+    Fume hood questions: <a href="mailto:ehs@virginia.edu" style="color:#fff;text-decoration:underline;">ehs@virginia.edu</a> or 434-982-4911</p>
+    <p class="boxnote">This page is the lab's living reference &mdash; every policy below is searchable and filterable, no need to dig through slide decks.</p>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="no-results" id="noResults">No policies match your search. Try a different term or clear the filters.</div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logos">
+      <img src="uva-sustainable-labs-logo.jpeg" alt="UVA Sustainability — Sustainable Labs logo" class="footer-logo">
+    </div>
+    <p><b>About this page.</b> Compiled from Ma Lab's internal sustainability policy documents and UVA Green Labs / UVA Sustainability training materials (inventory &amp; resource sharing, waste hierarchy, energy action plan, FIFO training, green chemistry, ordering process, animal research policies, and chemical fume hood tips). If a policy here ever conflicts with an updated lab memo, the memo wins &mdash; flag the difference to the lab manager so this page can be corrected.</p>
+    <p>Ma Lab &middot; University of Virginia.</p>
+  </div>
+</footer>
+
+<script>
+const DATA = [
+  {
+    "name": "Shared Consumables Policy",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Lab personnel prioritize sharing consumables, reagents, and chemicals using the Quartzy inventory management system to avoid duplicate purchases.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "quartzy consumables reagents chemicals shared duplicate purchases"
+  },
+  {
+    "name": "Shared Equipment Use",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Many items in the lab's inventory are designated for general lab use &mdash; check before assuming you need your own.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "shared equipment general use"
+  },
+  {
+    "name": "Surplus Resource Management",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Surplus equipment, consumables, and chemicals are repaired, donated, or sent to refurbishment organizations or other end-users (MERCI, ROSE, ReUSE) rather than discarded.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "surplus donate merci rose reuse refurbishment"
+  },
+  {
+    "name": "Inventory Check Before Orders",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Existing inventory in Quartzy must be checked before placing new orders, to prevent excessive or redundant purchasing.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "quartzy inventory check before orders redundant"
+  },
+  {
+    "name": "Order Consolidation Policy",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Orders are consolidated into larger shipments whenever possible, reducing the environmental impact of transportation.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "order consolidation shipments transportation"
+  },
+  {
+    "name": "Lab Water Use and Quality",
+    "type": "inv",
+    "role": "Inventory & Resource Sharing",
+    "talk": "Members are trained on water-saving strategies and choosing among tap, deionized, distilled, and reverse-osmosis water. Everyone selects the water quality fit for purpose, avoiding unnecessary over-purification.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "water use quality deionized distilled reverse osmosis"
+  },
+  {
+    "name": "Structured Laboratory Ordering Process",
+    "type": "inv",
+    "role": "Ordering Process",
+    "talk": "A six-step process: (1) methodology development & supply list, (2) submission to ordering personnel via Quartzy, (3) inventory check in Quartzy, (4) redundancy & expiry review using FIFO, (5) order consolidation across researchers, (6) order placement only after confirming necessity.",
+    "extra": "Multiple verification steps prevent unnecessary purchases and duplicate ordering of materials already in stock.",
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "ordering process six steps methodology quartzy redundancy expiry consolidation placement"
+  },
+  {
+    "name": "Ongoing Inventory Management",
+    "type": "inv",
+    "role": "Ordering Process",
+    "talk": "Regular audits confirm Quartzy records match physical inventory; usage tracking refines future ordering quantities and prevents overstocking; proactive communication lets researchers flag upcoming needs and changed plans early.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "audits usage tracking proactive communication overstocking"
+  },
+  {
+    "name": "Bulk Ordering Benefits",
+    "type": "inv",
+    "role": "Ordering Process",
+    "talk": "Reduces packaging waste, decreases carbon emissions from frequent deliveries, qualifies for volume discounts, lowers per-unit shipping costs, and minimizes administrative processing time.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "bulk ordering packaging waste carbon emissions volume discounts shipping"
+  },
+  {
+    "name": "Expiration Management",
+    "type": "inv",
+    "role": "Ordering Process",
+    "talk": "Implements FIFO usage, regularly reviews stock for approaching expiration dates, redistributes at-risk items to high-usage applications, and reduces hazardous waste disposal requirements.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "expiration management fifo redistribute hazardous waste"
+  },
+  {
+    "name": "The Waste Hierarchy",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Prevent &rarr; Reduce &rarr; Reuse &rarr; Recycle, in order of preference. No activity should begin without a plan for its waste, and recycling is treated as the last resort before disposal.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "waste hierarchy prevent reduce reuse recycle framework"
+  },
+  {
+    "name": "Safe Waste Disposal Guidelines",
+    "type": "waste",
+    "role": "Waste Management",
+    "talk": "Lab personnel adhere to guidelines for the safe disposal of liquid waste, separating aqueous, non-aqueous, and halogenated (chlorinated) waste when possible.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "liquid waste disposal aqueous non-aqueous halogenated chlorinated"
+  },
+  {
+    "name": "Minimizing Water-Based Vacuums",
+    "type": "waste",
+    "role": "Waste Management",
+    "talk": "Labs do not use water-vacuum aspirators or other water-based methods to create a vacuum.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "water vacuum aspirator"
+  },
+  {
+    "name": "Prevent: Digital Data Collection",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Using digital tools for data collection and analysis instead of paper is the highest priority in the hierarchy &mdash; it stops the waste from being generated at all.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "prevent digital data collection paper waste"
+  },
+  {
+    "name": "Reduce: Order Only What's Needed",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Order only the quantities of materials actually needed for an experiment to minimize excess waste.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "reduce order quantities excess waste"
+  },
+  {
+    "name": "Reuse: Glassware Over Single-Use",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Promote reusable lab items &mdash; glassware and containers &mdash; in place of single-use plastics.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "reuse glassware containers single-use plastics"
+  },
+  {
+    "name": "Recycle: Proper Segregation",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Educate on proper segregation of recyclable materials and the lab's specific recycling protocols.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "recycle segregation protocols"
+  },
+  {
+    "name": "Waste Hierarchy Hands-On Activities",
+    "type": "waste",
+    "role": "Waste Hierarchy Training",
+    "talk": "Waste Audit (1 hour): bins, scales, gloves, audit forms &mdash; produces baseline waste data. Reuse Challenge (1 week): identify single-use items to replace. Recycling Workshop (15 min): training on proper segregation per UVA regulations.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "waste audit reuse challenge recycling workshop hands-on activities"
+  },
+  {
+    "name": "Turn Off Equipment When Not in Use",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Ensure non-essential equipment is turned off when not actively being used; establish an end-of-day power-down routine; use power strips with switches; post reminders at workstations.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "turn off equipment power down routine power strips reminders"
+  },
+  {
+    "name": "Purchase Energy-Efficient Equipment",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Prioritize Energy Star or similarly certified models, weigh long-term energy cost savings when budgeting, replace outdated equipment, and choose electronics certified to EPEAT or TCO standards.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "energy star epeat tco certified efficient equipment purchasing"
+  },
+  {
+    "name": "Utilize Shared Equipment",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Coordinate with other research groups to share large equipment (freezers, centrifuges, spectrometers), set up shared scheduling systems, and consolidate experiments to avoid redundant equipment use.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "shared equipment coordination scheduling consolidate experiments"
+  },
+  {
+    "name": "Optimize Freezer & Refrigerator Usage",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Consolidate samples to reduce the number of units needed, defrost regularly, set freezers to &minus;70&deg;C instead of &minus;80&deg;C unless absolutely necessary, and keep door seals well maintained.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "freezer refrigerator -70 -80 defrost seals"
+  },
+  {
+    "name": "Optimize Lighting",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Turn off lights in unused rooms and storage areas, replace old lighting with LEDs, and install motion-sensor or timer-based lighting in low-traffic areas.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "lighting led motion sensor timer"
+  },
+  {
+    "name": "Reduce Plug Loads",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Minimize plug load by consolidating equipment and removing redundant devices, use energy-saving settings on computers and monitors, and unplug chargers and small equipment to avoid phantom loads.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "plug loads phantom loads energy saving settings"
+  },
+  {
+    "name": "Cold Trap & Vacuum Pump Use",
+    "type": "energy",
+    "role": "Energy & Environmental Practices",
+    "talk": "A cold trap must be used in line before vacuum pumps to prevent volatiles from entering the pump, and vacuum pumps must be turned off when not in use.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "cold trap vacuum pump volatiles"
+  },
+  {
+    "name": "Incubators & Biosafety Cabinets",
+    "type": "energy",
+    "role": "Energy & Environmental Practices",
+    "talk": "Incubators and biosafety cabinets must be turned off completely when not in use for extended periods.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "incubators biosafety cabinets off extended periods"
+  },
+  {
+    "name": "Cloud-First Data Storage Policy",
+    "type": "energy",
+    "role": "Energy & Environmental Practices",
+    "talk": "Storing data and files in the cloud rather than on local networks or computers reduces energy usage and improves accessibility. Each UVA OneDrive account permits up to 5 TB of storage.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "cloud storage onedrive 5tb energy usage"
+  },
+  {
+    "name": "Monitor & Track Energy Usage",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Install energy meters for real-time monitoring, conduct periodic energy audits, and use audit data to assess impact and make adjustments. Maintenance: service equipment regularly, replace worn components as needed, clean air filters monthly.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "energy meters audits monitoring maintenance air filters"
+  },
+  {
+    "name": "Collaborate with Building Management",
+    "type": "energy",
+    "role": "Energy Action Plan",
+    "talk": "Work with facility management to optimize HVAC for the lab's needs, request energy-efficient infrastructure like programmable thermostats, and advocate for building-wide sustainability initiatives.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "hvac building management thermostats sustainability initiatives"
+  },
+  {
+    "name": "What FIFO Means",
+    "type": "fifo",
+    "role": "FIFO Training",
+    "talk": "First In, First Out: using the oldest unexpired materials first. It prevents waste by using materials before they expire, ensures accurate results by avoiding degraded reagents, and reduces cost from discarded materials.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "fifo first in first out definition importance"
+  },
+  {
+    "name": "Labeling and Organization",
+    "type": "fifo",
+    "role": "FIFO Training",
+    "talk": "All reagents, chemicals, and supplies are clearly labeled with date of receipt and expiration date. Older items sit at the front of storage, newer items at the back.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "labeling organization date receipt expiration"
+  },
+  {
+    "name": "Inventory Checks for FIFO",
+    "type": "fifo",
+    "role": "FIFO Training",
+    "talk": "Regular inventory checks confirm materials are being used in the correct order; expired items are removed promptly to avoid accidental use.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "inventory checks expired items removal"
+  },
+  {
+    "name": "FIFO Storage Practices",
+    "type": "fifo",
+    "role": "FIFO Training",
+    "talk": "Dedicated storage areas for different material types (chemicals, biological reagents) make FIFO easier to implement, and proper storage conditions extend shelf life.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "storage practices dedicated areas shelf life"
+  },
+  {
+    "name": "FIFO Hands-On Activities",
+    "type": "fifo",
+    "role": "FIFO Training",
+    "talk": "Inventory Audit: identify materials nearing expiration and reorganize. Labeling Exercise: practice color-coded date labeling. Scenario-Based Training: decide which materials to use based on FIFO.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "inventory audit labeling exercise scenario training"
+  },
+  {
+    "name": "The 12 Principles, Applied to Research Labs",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Green chemistry designs processes to reduce or eliminate hazardous substances. Key principles for the bench: waste prevention, atom economy, designing safer chemicals, and less hazardous chemical syntheses.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "12 principles green chemistry hazardous substances atom economy"
+  },
+  {
+    "name": "Waste Prevention (Green Chemistry)",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Plan experiments to minimize waste generation by scaling reactions appropriately.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "waste prevention scaling reactions"
+  },
+  {
+    "name": "Energy Efficiency (Green Chemistry)",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Use energy-efficient equipment and conduct reactions at ambient conditions whenever possible.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "ambient conditions energy efficient reactions"
+  },
+  {
+    "name": "Safer Solvents",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Replace hazardous solvents with greener alternatives, such as water or ethanol.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "safer solvents water ethanol hazardous"
+  },
+  {
+    "name": "Catalysis",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Incorporate catalysts to improve reaction efficiency and reduce waste.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "catalysis catalysts reaction efficiency"
+  },
+  {
+    "name": "Real-Time Monitoring (Green Chemistry)",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Use analytical tools to monitor reactions and prevent the formation of hazardous byproducts.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "real-time monitoring analytical tools byproducts"
+  },
+  {
+    "name": "Analytical Chemistry Adaptations",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Minimize sample sizes and waste in analytical methods, use non-toxic reagents and solvents, and optimize methods to reduce energy consumption and improve efficiency.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "analytical chemistry sample sizes non-toxic reagents optimize methods"
+  },
+  {
+    "name": "Green Chemistry Hands-On Activities",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Green Experiment Design: redesign an experiment for waste reduction, renewable feedstocks, and atom economy. Solvent Replacement Exercise: research greener alternatives. Energy Audit: identify consumption-reduction opportunities.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "green experiment design solvent replacement energy audit"
+  },
+  {
+    "name": "What Makes Chemistry Green (EPA)",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Per the EPA's definition, green chemistry: prevents pollution at the molecular level; applies as a philosophy across all of chemistry rather than one discipline; applies innovative solutions to real-world environmental problems; results in source reduction by preventing pollution generation; reduces negative impacts on human health and the environment; lessens or eliminates hazards from existing products and processes; and designs products and processes to reduce their intrinsic hazards.",
+    "extra": null,
+    "links": [
+      {
+        "note": "EPA \u2014 Basics of Green Chemistry",
+        "url": "https://www.epa.gov/greenchemistry/basics-green-chemistry"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "epa definition green chemistry pollution prevention source reduction intrinsic hazards"
+  },
+  {
+    "name": "Green Chemistry Tools & Alternatives",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "Two reference tools the lab points to when picking a greener chemical or process: MIT's Green Chemical Alternatives Wizard, which suggests less-hazardous substitutes for common lab solvents and reagents, and DOZN, a quantitative scoring tool that rates the relative greenness of a chemical, synthetic route, or process against the 12 Principles.",
+    "extra": null,
+    "links": [
+      {
+        "note": "MIT Green Chemistry Alternatives (EHS)",
+        "url": "https://ehs-apps.mit.edu/site/environmental-stewardship/green-chemistry"
+      },
+      {
+        "note": "DOZN Quantitative Green Chemistry Evaluator",
+        "url": "https://www.sigmaaldrich.com/US/en/services/software-and-digital-platforms/dozn-tool"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "mit green alternatives wizard dozn evaluator solvent substitution scoring tool"
+  },
+  {
+    "name": "Green Chemistry Champion",
+    "type": "chem",
+    "role": "Green Chemistry Training",
+    "talk": "A designated lab member oversees the implementation of sustainable practices, with regular protocol reviews and an open feedback channel for new ideas.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "green chemistry champion protocol review feedback"
+  },
+  {
+    "name": "IVC Rack Usage Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "The Individual Ventilated Cages (IVC) rack must be unplugged when not in use, reducing electricity consumption, extending equipment lifespan, lowering operational costs, and minimizing carbon footprint.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "ivc rack unplugged energy carbon footprint"
+  },
+  {
+    "name": "Disinfectant Minimization Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "The vivarium calculates exact disinfectant quantities needed, mixes or dilutes only the required amount, and uses prepared solutions efficiently with minimal waste.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "disinfectant minimization assessment preparation implementation"
+  },
+  {
+    "name": "Environmentally Friendly Disinfectant Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Selected disinfectants are biodegradable, have reduced toxicity to aquatic life and ecosystems, and still maintain effective sterilization against pathogens.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "biodegradable reduced toxicity effective sterilization disinfectant"
+  },
+  {
+    "name": "Space Maximization Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Maximizing rack and room density reduces heating/cooling requirements, minimizes lighting needs, lowers overall energy consumption, and decreases the physical footprint of operations.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "space maximization rack density heating cooling footprint"
+  },
+  {
+    "name": "Cage Reuse and Recycling Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Cages go through sanitization, inspection for integrity, and are returned to service; damaged cages are repaired or their materials recycled.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "cage reuse recycling sanitization inspection repair"
+  },
+  {
+    "name": "Resource Sharing and Carcass Donation Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Multiple scientists coordinate to use samples from a single animal &mdash; tissues and specimens are cataloged and distributed to multiple research teams, maximizing the scientific value of each animal.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "resource sharing carcass donation sample distribution multiple studies"
+  },
+  {
+    "name": "Energy and Water Efficient Equipment Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Cage and rack washers have been upgraded to energy- and water-efficient models, reducing environmental impact while maintaining cleanliness standards.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "cage rack washers energy water efficient"
+  },
+  {
+    "name": "Animal Bedding Composting Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Dirty animal bedding is composted whenever possible, creating a closed-loop system that reduces landfill waste and produces nutrient-rich soil amendments.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "bedding composting landfill closed-loop soil"
+  },
+  {
+    "name": "Animal Food Composting Policy",
+    "type": "animal",
+    "role": "Animal Research Policy",
+    "talk": "Unused or expired animal food is collected and segregated, processed with the appropriate carbon-nitrogen balance, and finished compost is used for landscaping or donated to community gardens.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "food composting collection processing utilization community gardens"
+  },
+  {
+    "name": "Is Your Fume Hood Certified?",
+    "type": "safety",
+    "role": "Chemical Fume Hood Tips",
+    "talk": "UVA Environmental Health and Safety inspects fume hoods annually. A certification sticker on the hood indicates whether it's safe to work at.",
+    "extra": null,
+    "links": [],
+    "emails": [
+      "ehs@virginia.edu"
+    ],
+    "meta": null,
+    "topics": "fume hood certification annual inspection sticker"
+  },
+  {
+    "name": "Fume Hood Safety First",
+    "type": "safety",
+    "role": "Chemical Fume Hood Tips",
+    "talk": "If the airflow monitor detects a loss of critically safe airflow, stop using the hood, secure chemicals, close the sash, and call UVA EHS to place a work order.",
+    "extra": null,
+    "links": [],
+    "emails": [
+      "434-982-4911 \u2014 UVA Environmental Health & Safety"
+    ],
+    "meta": null,
+    "topics": "airflow monitor loss safe airflow secure chemicals work order"
+  },
+  {
+    "name": "Keep the Fume Hood Clean",
+    "type": "safety",
+    "role": "Chemical Fume Hood Tips",
+    "talk": "A clean fume hood is essential for user safety and performance. Do not store chemicals or lab materials in the hood; always work at least six inches into the hood.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "keep clean no storage six inches"
+  },
+  {
+    "name": "Shut the Sash",
+    "type": "safety",
+    "role": "Chemical Fume Hood Tips",
+    "talk": "Work with a minimal opening during experiments, and shut the sash entirely when the hood is not in use &mdash; both a safety practice and an energy-saving one.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "shut sash minimal opening energy saving"
+  },
+  {
+    "name": "Fume Hood Sash Use Policy",
+    "type": "safety",
+    "role": "Environmental Practices",
+    "talk": "Personnel must not work in the fume hood with the sash pulled above the sash stop (typically 18\" / 45 cm), for both safety and energy efficiency.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "sash stop 18 inches 45cm safety energy"
+  },
+  {
+    "name": "No Storage in Fume Hoods",
+    "type": "safety",
+    "role": "Environmental Practices",
+    "talk": "Chemicals, reagents, consumables, excess equipment, or containers must not be stored in fume hoods.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "no storage fume hoods chemicals containers"
+  },
+  {
+    "name": "Sample and Reagent Storage Policy",
+    "type": "safety",
+    "role": "Environmental Practices",
+    "talk": "All personnel store samples and reagents at the minimum appropriate temperature specified by manufacturer guidelines, protocols, or SOPs. Refrigeration and freezer units should precisely match the recommended range; periodic audits verify compliance.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "sample reagent storage minimum temperature audits sops"
+  },
+  {
+    "name": "Ambient Conditions Preference",
+    "type": "safety",
+    "role": "Environmental Practices",
+    "talk": "Lab personnel evaluate and, when possible, switch protocols, procedures, or reactions to ambient conditions instead of using elevated or reduced temperatures and pressures.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "ambient conditions elevated reduced temperature pressure"
+  },
+  {
+    "name": "Virtual Meetings and Green Travel",
+    "type": "safety",
+    "role": "Environmental Practices",
+    "talk": "Personnel are encouraged to use virtual meetings, alternative local transportation, and trains instead of short-haul flights for conferences and external meetings whenever feasible.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "virtual meetings green travel trains short-haul flights"
+  },
+  {
+    "name": "Findability",
+    "type": "fair",
+    "role": "FAIR Data Principles",
+    "talk": "Data has unique identifiers, facilitating reuse, reproducibility, and portability.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "findability unique identifiers reproducibility portability"
+  },
+  {
+    "name": "Accessibility",
+    "type": "fair",
+    "role": "FAIR Data Principles",
+    "talk": "Data is preserved and can be found even when the original workflow is no longer available.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "accessibility preserved workflow"
+  },
+  {
+    "name": "Interoperability",
+    "type": "fair",
+    "role": "FAIR Data Principles",
+    "talk": "Data can be easily translated from one language or management system to another.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "interoperability translated management system"
+  },
+  {
+    "name": "Reusability",
+    "type": "fair",
+    "role": "FAIR Data Principles",
+    "talk": "Data can be modified, built upon, and incorporated into other workflows.",
+    "extra": null,
+    "links": [],
+    "emails": [],
+    "meta": null,
+    "topics": "reusability modified workflows"
+  },
+  {
+    "name": "The Carbon Cost of Research Computing",
+    "type": "fair",
+    "role": "FAIR Data Principles",
+    "talk": "UVA Research Computing was responsible for 1,755 MTCO2e in 2024 &mdash; comparable to 236 homes' energy use for a year, 409 gas-powered vehicles driven for a year, or 4,469,212 miles driven by a gas-powered car.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Estimate your own emissions: Green Algorithms calculator",
+        "url": "https://calculator.green-algorithms.org"
+      },
+      {
+        "note": "FAIR principles reference paper (Nature)",
+        "url": "https://www.nature.com/articles/s41597-025-04451-9"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "carbon emissions research computing mtco2e calculator"
+  },
+  {
+    "name": "Autoclave Log",
+    "type": "autoclave",
+    "role": "Equipment Records",
+    "talk": "Every autoclave is tracked with a monthly cleaning and spore-testing record, plus a per-cycle log covering load description, sterility indicator tape, start/end time, and wet/dry temperature.",
+    "extra": "Keeping this current is both a safety requirement and evidence for lab certification audits.",
+    "links": [
+      {
+        "note": "Download Autoclave_Log_Sheet.xlsx",
+        "url": "Autoclave_Log_Sheet.xlsx"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "autoclave log monthly cleaning spore testing cycle sterility temperature"
+  },
+  {
+    "name": "Laboratory Sustainability Policies",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full policy document covering inventory & resource sharing, waste management, energy efficiency, environmental practices, and fume hood & safety practices.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Laboratory-Sustainability-Policies.pdf",
+        "url": "Laboratory-Sustainability-Policies.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "laboratory sustainability policies pdf source document full"
+  },
+  {
+    "name": "Waste Hierarchy Principles",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full training program on Prevent, Reduce, Reuse, Recycle &mdash; including practical applications, hands-on activities, and the monitoring plan.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Waste-Hierarchy-Principles-Dr-Mas-Lab.pdf",
+        "url": "Waste-Hierarchy-Principles-Dr-Mas-Lab.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "waste hierarchy principles pdf source document training program"
+  },
+  {
+    "name": "Action Plan for Reducing Energy Consumption",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full energy action plan &mdash; equipment shutdowns, purchasing guidance, freezer/lighting/plug-load optimization, monitoring, maintenance schedule, and building collaboration.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Action-Plan-for-Reducing-Energy-Consumption-in-Dr-Mas-Lab.pdf",
+        "url": "Action-Plan-for-Reducing-Energy-Consumption-in-Dr-Mas-Lab.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "energy action plan pdf source document reducing consumption"
+  },
+  {
+    "name": "FIFO Training Program",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full First In, First Out training program, including labeling, storage, hands-on activities, and continuous improvement.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download FIFO-Training-Program-for-Dr-Mas-Lab.pdf",
+        "url": "FIFO-Training-Program-for-Dr-Mas-Lab.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "fifo training program pdf source document"
+  },
+  {
+    "name": "Understanding the 12 Principles of Green Chemistry",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full green chemistry training program &mdash; the 12 Principles, practical applications, hands-on activities, analytical chemistry adaptations, and monitoring.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Understanding-the-12-Principles-of-Green-Chemistry.pdf",
+        "url": "Understanding-the-12-Principles-of-Green-Chemistry.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "12 principles green chemistry pdf source document"
+  },
+  {
+    "name": "Ordering Process",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full structured laboratory ordering process, plus ongoing inventory management practices and environmental/cost optimization strategies.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Ordering-Process.pdf",
+        "url": "Ordering-Process.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "ordering process pdf source document"
+  },
+  {
+    "name": "Sustainable and Responsible Animal Research Policies",
+    "type": "docs",
+    "role": "Source PDF",
+    "talk": "The full set of vivarium policies &mdash; IVC racks, disinfectant use, space maximization, cage reuse, resource sharing, and composting.",
+    "extra": null,
+    "links": [
+      {
+        "note": "Download Sustainable_and_Responsible_Animal_Research_Policies.pdf",
+        "url": "Sustainable_and_Responsible_Animal_Research_Policies.pdf"
+      }
+    ],
+    "emails": [],
+    "meta": null,
+    "topics": "animal research policies pdf source document vivarium"
+  }
+];
+
+const grid = document.getElementById('grid');
+const noResults = document.getElementById('noResults');
+const countEl = document.getElementById('count');
+const searchEl = document.getElementById('search');
+const filterBtns = document.querySelectorAll('.filter-btn');
+let activeFilter = 'all';
+
+const CHIP_LABEL = {
+  inv: 'Inventory &amp; Ordering', waste: 'Waste Mgmt', energy: 'Energy',
+  fifo: 'FIFO', chem: 'Green Chemistry', animal: 'Animal Research',
+  safety: 'Safety', fair: 'FAIR Data', autoclave: 'Autoclave', docs: 'Source Document'
+};
+
+function cardHTML(item){
+  const fileExt = /\.(xlsx|xls|csv|docx|pdf|pptx|zip)$/i;
+  const links = (item.links || []).map(l => {
+    const isFile = fileExt.test(l.url);
+    const attrs = isFile ? `download` : `target="_blank" rel="noopener"`;
+    return `<li><a href="${l.url}" ${attrs}>${l.note}</a></li>`;
+  }).join('');
+  const emails = (item.emails || []).map(e => `<span>${e}</span>`).join('');
+  return `
+  <div class="card" data-type="${item.type}">
+    <div class="card-top">
+      <span class="chip ${item.type}">${CHIP_LABEL[item.type]}</span>
+    </div>
+    <h3>${item.name}</h3>
+    <p class="role">${item.role || ''}</p>
+    <p class="talk">${item.talk}</p>
+    ${item.extra ? `<p class="talk" style="color:var(--muted);font-size:.88rem;">${item.extra}</p>` : ''}
+    ${links ? `<ul class="links">${links}</ul>` : ''}
+    ${emails ? `<div class="emails">${emails}</div>` : ''}
+    ${item.meta ? `<p class="meta">${item.meta}</p>` : ''}
+  </div>`;
+}
+
+function normalize(s){ return (s || '').toLowerCase(); }
+
+function render(){
+  const q = normalize(searchEl.value);
+  const filtered = DATA.filter(item => {
+    const matchesFilter = activeFilter === 'all' || item.type === activeFilter;
+    if (!matchesFilter) return false;
+    if (!q) return true;
+    const haystack = normalize([item.name, item.role, item.talk, item.extra, item.topics].join(' '));
+    return haystack.includes(q);
+  });
+  grid.innerHTML = filtered.map(cardHTML).join('');
+  noResults.style.display = filtered.length ? 'none' : 'block';
+  countEl.textContent = `${filtered.length} of ${DATA.length} policies shown`;
+}
+
+searchEl.addEventListener('input', render);
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+});
+
+render();
+</script>
+</body>
+</html>
